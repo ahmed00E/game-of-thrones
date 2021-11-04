@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+// import { Button } from 'bootstrap'
+import React, { Component } from 'react'
+import Character  from "./component/Character"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      characters: []
+    }
+    
+  }
+
+  componentDidMount() {
+   
+    fetch("https://thronesapi.com/api/v2/Characters")
+    .then(response => response.json())
+    .then(result => this.setState({characters:result}))
+    
+
+  }
+   
+
+
+ render() {
+    return (
+      <div>
+        <Character/>
+      <h>Game of thrones</h>
+     <button onClick={this.componentDidMount}></button>
+     {this.state.characters.map(character => <Character/> 
+     
+)} 
+
+     
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
